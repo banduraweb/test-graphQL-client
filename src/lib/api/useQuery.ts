@@ -1,25 +1,65 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {server} from './server';
 
 
 interface State<TData> {
-	data: TData | null
+	data: TData | null,
+	loading: boolean,
+	error: boolean
 }
 
-export const useQuery = <TData= any> (query: string) => {
+interface QueryResults<TData> extends State<TData> {
+	refetch: () => void
+}
+
+
+export const useQuery = <TData = any>(query: string):QueryResults<TData> => {
 
 	const [state, setState] = useState<State<TData>>({
-		data: null
+		data: null,
+		loading: false,
+		error: false
 	});
 
-	useEffect(()=>{
-		(async ()=>{
-			const {data} = await server.fetch<TData>({query});
-			console.log(data);
-			setState({data});
-		})()
-	},[query]);
 
-	return state
+	const fetch = useCallback(() => {
+			(async () => {
+				try {
+					setState(prev => ({
+						...prev,
+						loading: true
+					}));
+					const { data, errors } = await server.fetch<TData>({ query });
+
+					if (errors && errors.length) {
+						throw new Error('Query error')
+
+					}
+
+					setState(prev => ({
+						...prev,
+						data: data,
+						loading: false
+					}));
+				} catch (e) {
+					setState(prev => ({
+						...prev,
+						error: true,
+						loading: false
+
+					}));
+					throw console.error(e);
+				}
+
+			})();
+
+		}, [query])
+	;
+
+	useEffect(()=>{
+		fetch();
+	}, [fetch]);
+
+	return { ...state, refetch: fetch };
 
 };
