@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {server} from '../../lib/api';
+import React from 'react';
+import {server, useQuery} from '../../lib/api';
 import { ListingsData, DeleteListingsData, DeleteListingsVariables, IListings } from './types';
 
 const LISTINGS = `
@@ -27,15 +27,9 @@ const DELETE_LISTING = `
 
 export const Listings = () => {
 
-  const [listings, setListings] = useState<IListings[]>([]);
-  useEffect(()=>{
-    fetchListings()
-  }, []);
+  const {data} = useQuery<ListingsData>(LISTINGS);
 
- const fetchListings = async ()=> {
-  const {data} = await server.fetch<ListingsData>({query: LISTINGS});
-   setListings(data.listings);
- };
+
 
   const deleteListings = async (id: string) => {
     await server.fetch<DeleteListingsData, DeleteListingsVariables>(
@@ -45,11 +39,11 @@ export const Listings = () => {
           id
         }
       });
-    fetchListings()
+
   };
 
 
-
+const listings = data ? data.listings : null;
 
   const listingsList = listings ? (
     <ul>
