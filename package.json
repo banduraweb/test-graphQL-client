@@ -6,20 +6,32 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/graphql": "^14.5.0",
     "@types/jest": "^24.0.0",
     "@types/node": "^13.11.0",
     "@types/react": "^16.9.32",
     "@types/react-dom": "^16.9.6",
+    "antd": "^4.1.4",
+    "apollo": "^2.27.0",
+    "apollo-boost": "^0.4.7",
+    "graphql": "^14.5.0",
+    "node-sass": "^4.13.1",
     "react": "^16.13.1",
+    "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "typescript": "^3.8.3"
+  },
+  "resolutions": {
+    "type-graphql/graphql": "^14.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "codegen:schema": "npx apollo client:download-schema --endpoint=http://localhost:9005/api",
+    "codegen:generete": "npx apollo client:codegen --localSchemaFile=schema.json --includes=src/**/*.tsx --target=typescript"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,5 +48,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy" : "http://localhost:9005"
+  "proxy": "http://localhost:9005"
 }

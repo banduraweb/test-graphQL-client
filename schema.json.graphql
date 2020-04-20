@@ -1,0 +1,26 @@
+# This file was generated based on "schema.json". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Listing {
+    address: String!
+    id: ID!
+    image: String!
+    numOfBaths: Int!
+    numOfBeds: Int!
+    numOfGuests: Int!
+    price: Int!
+    rating: Int!
+    title: String!
+}
+
+type Mutation {
+    deleteListings(id: ID!): Listing!
+}
+
+type Query {
+    listings: [Listing!]!
+}

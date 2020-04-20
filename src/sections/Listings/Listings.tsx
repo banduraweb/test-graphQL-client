@@ -1,13 +1,18 @@
 import React from 'react';
-import { useQuery, useMutation} from '../../lib/api';
-import { ListingsData, DeleteListingsData, DeleteListingsVariables } from './types';
+import {gql} from 'apollo-boost'
+import { useQuery, useMutation} from 'react-apollo';
+import {Listings as ListingsData} from './__generated__/Listings';
+import {DeleteListings as DeleteListingsData, DeleteListingsVariables} from './__generated__/DeleteListings';
+import { List } from 'antd';
+import './styles/Listings.scss'
 
-const LISTINGS = `
+const LISTINGS = gql`
   query Listings {
     listings {
     id
     title
     image
+    address
     price
     numOfGuests
     numOfBeds
@@ -17,7 +22,7 @@ const LISTINGS = `
   }
 `;
 
-const DELETE_LISTING = `
+const DELETE_LISTING = gql`
   mutation DeleteListings($id: ID!) {
     deleteListings(id: $id) {
     id
@@ -33,23 +38,29 @@ export const Listings = () => {
     ] = useMutation<DeleteListingsData, DeleteListingsVariables>(DELETE_LISTING);
 
   const handleDeleteListings = async (id: string) => {
-  await deleteListings({id});
+  await deleteListings({variables: {id}});
     refetch();
   };
 
 
 const listings = data ? data.listings : null;
-
+  console.log(listings);
   const listingsList = listings ? (
-    <ul>
-      {listings.map(listing=>(
-        <li key={listing.id}>
-          {listing.title}
-        <button onClick={()=>handleDeleteListings(listing.id)}>delete</button>
-        </li>
-      ))}
-    </ul>
-  ) : null;
+  <List itemLayout="horizontal"
+        dataSource={listings}
+        renderItem={listing => (
+          <List.Item>
+            <List.Item.Meta
+             title={listing.title}
+             description={listing.address}
+            />
+          </List.Item>
+        )}
+
+  />
+) : null;
+
+
 
   if (loading) {
     return <h2>Loading...</h2>
@@ -64,11 +75,11 @@ const listings = data ? data.listings : null;
   const errorDeleteMessage = deleteError ? <h4>Uh oh! Something went wrong - please try again later</h4> : null;
 
  return (
-   <>
+   <div className="listings">
      <h1>Hotel list</h1>
      {listingsList}
      {loadingMessage}
      {errorDeleteMessage}
-    </>
+    </div>
    )
 };
