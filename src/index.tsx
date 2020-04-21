@@ -8,7 +8,7 @@ import {Listings} from './sections'
 
 
 const client = new ApolloClient({
-  uri: "/api"
+  uri: "https://floating-citadel-42286.herokuapp.com/api"
 });
 
 
