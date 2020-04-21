@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/test-graphQL-client/static/css/main.24275666.chunk.css",
+    "main.js": "/test-graphQL-client/static/js/main.95df19c0.chunk.js",
+    "main.js.map": "/test-graphQL-client/static/js/main.95df19c0.chunk.js.map",
+    "runtime-main.js": "/test-graphQL-client/static/js/runtime-main.ffb94870.js",
+    "runtime-main.js.map": "/test-graphQL-client/static/js/runtime-main.ffb94870.js.map",
+    "static/css/2.a72c35d3.chunk.css": "/test-graphQL-client/static/css/2.a72c35d3.chunk.css",
+    "static/js/2.78870bfb.chunk.js": "/test-graphQL-client/static/js/2.78870bfb.chunk.js",
+    "static/js/2.78870bfb.chunk.js.map": "/test-graphQL-client/static/js/2.78870bfb.chunk.js.map",
+    "index.html": "/test-graphQL-client/index.html",
+    "precache-manifest.d268e2e045169b05749c0b2aaa4e0c0d.js": "/test-graphQL-client/precache-manifest.d268e2e045169b05749c0b2aaa4e0c0d.js",
+    "service-worker.js": "/test-graphQL-client/service-worker.js",
+    "static/css/2.a72c35d3.chunk.css.map": "/test-graphQL-client/static/css/2.a72c35d3.chunk.css.map",
+    "static/css/main.24275666.chunk.css.map": "/test-graphQL-client/static/css/main.24275666.chunk.css.map",
+    "static/js/2.78870bfb.chunk.js.LICENSE.txt": "/test-graphQL-client/static/js/2.78870bfb.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ffb94870.js",
+    "static/css/2.a72c35d3.chunk.css",
+    "static/js/2.78870bfb.chunk.js",
+    "static/css/main.24275666.chunk.css",
+    "static/js/main.95df19c0.chunk.js"
+  ]
+}
